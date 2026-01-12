@@ -51,23 +51,38 @@ const App: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* 고정 헤더 영역 */}
       <div className="sticky top-0 z-50 shadow-xl bg-gray-50">
-        {/* Slim Top Header */}
-        <header className="bg-[#001a4d] text-white p-3 border-b border-white/5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center justify-center bg-white rounded-md p-1 px-2 shadow-inner min-w-[60px]">
-                <img 
-                  src="https://www.usana.com/ux/dotcom/images/global/logos/usana-logo-blue.svg" 
-                  alt="USANA" 
-                  className="h-3 w-auto object-contain"
-                />
+        {/* Top Branding Bar */}
+        <header className="bg-[#001a4d] text-white p-3 border-b border-white/10">
+          <div className="flex items-center justify-between px-1">
+            <div className="flex items-center space-x-4">
+              {/* USANA Text Logo: 이미지 대신 폰트로 고급스럽게 구현 */}
+              <div className="flex flex-col items-start leading-none">
+                <span className="text-[18px] font-[900] tracking-[-0.05em] text-white">USANA</span>
+                <div className="h-[2px] w-full bg-usanaGold mt-0.5 rounded-full"></div>
               </div>
-              <div className="flex flex-col border-l border-white/20 pl-3">
-                <h1 className="text-[12px] font-black tracking-tighter leading-none uppercase italic text-white">2026 Malaysia</h1>
-                <span className="text-[8px] text-white/50 font-bold tracking-[0.1em] mt-0.5 uppercase leading-none italic">Unstoppable Together</span>
+              
+              <div className="flex flex-col border-l border-white/20 pl-4 py-0.5">
+                {/* 2026 MALAYSIA CONVENTION */}
+                <h1 className="text-[12px] font-black tracking-tighter leading-tight uppercase italic text-white whitespace-nowrap">
+                  2026 MALAYSIA CONVENTION
+                </h1>
+                {/* WITH TEAM 강조 */}
+                <div className="flex items-center space-x-1.5 mt-0.5">
+                  <span className="text-[9px] text-usanaGold font-black tracking-widest uppercase italic">
+                    WITH TEAM
+                  </span>
+                  <span className="text-[8px] text-white/40 font-bold uppercase tracking-tight">
+                    | Unstoppable Together
+                  </span>
+                </div>
               </div>
             </div>
-            <div className="bg-usanaGold/20 px-2 py-0.5 rounded text-[9px] border border-usanaGold/30 font-black text-usanaGold">EST. 2026</div>
+            
+            <div className="flex flex-col items-end">
+              <div className="bg-white/10 px-2 py-0.5 rounded text-[8px] border border-white/10 font-black text-usanaGold tracking-widest">
+                EST. 2026
+              </div>
+            </div>
           </div>
         </header>
 
@@ -118,7 +133,6 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* 메인 콘텐츠: 헤더가 sticky이므로 별도의 padding-top 없이도 자연스럽게 이어짐 */}
       <main className="flex-grow pb-24 bg-gray-50">
         {activeTab === 'HOME' && <HomeTab />}
         {activeTab === 'SCHEDULE' && <ScheduleTab />}
