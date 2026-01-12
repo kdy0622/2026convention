@@ -16,12 +16,12 @@ const HomeTab: React.FC = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = { 
         timeZone: 'Asia/Kuala_Lumpur',
-        year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' 
+        month: 'short', day: 'numeric', weekday: 'short' 
       };
       const klFormatter = new Intl.DateTimeFormat('ko-KR', options);
       const klTimeFormatter = new Intl.DateTimeFormat('ko-KR', {
         timeZone: 'Asia/Kuala_Lumpur',
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+        hour: '2-digit', minute: '2-digit', hour12: false
       });
       setKlDate(klFormatter.format(now));
       setKlTime(klTimeFormatter.format(now));
@@ -51,19 +51,25 @@ const HomeTab: React.FC = () => {
   };
 
   return (
-    <div className="p-4 space-y-6 animate-fadeIn pb-10">
-      {/* Time Display */}
-      <section className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col items-center text-center">
-        <i className="fas fa-clock text-usanaBlue mb-2 text-2xl"></i>
-        <span className="text-[10px] text-gray-400 font-bold uppercase mb-1 tracking-widest">MALAYSIA LOCAL</span>
-        <p className="text-xs text-gray-500 font-medium mb-1">{klDate}</p>
-        <span className="text-3xl font-black text-usanaBlue tracking-tighter">{klTime || '--:--:--'}</span>
+    <div className="p-4 space-y-4 animate-fadeIn pb-10">
+      {/* Optimized Horizontal Time Display */}
+      <section className="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+            <i className="fas fa-clock text-usanaBlue text-lg"></i>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[9px] text-gray-400 font-black uppercase tracking-wider">KL LOCAL TIME</span>
+            <p className="text-[11px] text-gray-500 font-bold leading-none mt-0.5">{klDate}</p>
+          </div>
+        </div>
+        <span className="text-2xl font-black text-usanaBlue tracking-tighter">{klTime || '--:--'}</span>
       </section>
 
       {/* Currency */}
       <div className="bg-gradient-to-br from-usanaBlue to-blue-900 p-6 rounded-[2rem] shadow-xl text-white">
         <div className="flex justify-between items-center mb-5">
-          <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-[10px] font-black tracking-widest text-white">CURRENCY</span>
+          <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-[10px] font-black tracking-widest text-white">CURRENCY (1 MYR = 360 KRW)</span>
           <i className="fas fa-coins opacity-50"></i>
         </div>
         <div className="space-y-4">
@@ -92,17 +98,27 @@ const HomeTab: React.FC = () => {
         </button>
         {isGalleryOpen && (
           <div className="px-6 pb-6 pt-2 animate-slideDown">
-            <label className="mb-4 block w-full py-4 border-2 border-dashed border-gray-200 rounded-2xl text-center text-xs text-gray-400 font-bold cursor-pointer active:bg-gray-50">
-              <i className="fas fa-plus mr-2"></i>사진 추가
+            <div className="mb-4 p-4 bg-blue-50 rounded-2xl border border-blue-100">
+              <p className="text-[11px] text-blue-800 leading-relaxed font-medium">
+                <i className="fas fa-info-circle mr-1"></i>
+                여권 사본, 항공권 E-티켓, 호텔 예약증 등을 촬영하거나 캡처하여 보관하세요. 비상시 오프라인에서도 확인이 가능합니다.
+              </p>
+            </div>
+            <label className="mb-4 block w-full py-4 border-2 border-dashed border-gray-200 rounded-2xl text-center text-xs text-gray-400 font-bold cursor-pointer active:bg-gray-50 transition-colors">
+              <i className="fas fa-camera mr-2"></i>사진 촬영 및 업로드
               <input type="file" className="hidden" onChange={handleFileUpload} accept="image/*" multiple />
             </label>
-            <div className="grid grid-cols-2 gap-2">
-              {images.map((img, idx) => (
-                <div key={idx} className="relative aspect-square rounded-xl overflow-hidden border border-gray-100" onClick={() => setSelectedImg(img)}>
-                  <img src={img} className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
+            {images.length === 0 ? (
+              <p className="text-center py-8 text-[11px] text-gray-300">보관된 사진이 없습니다.</p>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                {images.map((img, idx) => (
+                  <div key={idx} className="relative aspect-square rounded-xl overflow-hidden border border-gray-100 shadow-sm" onClick={() => setSelectedImg(img)}>
+                    <img src={img} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -110,15 +126,17 @@ const HomeTab: React.FC = () => {
       {/* Image Modal */}
       {selectedImg && (
         <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-4">
-          <div className="w-full flex justify-end space-x-4 mb-4">
-            <a href={selectedImg} download="travel-image.png" className="text-white text-xl"><i className="fas fa-download"></i></a>
-            <button onClick={() => setSelectedImg(null)} className="text-white text-xl"><i className="fas fa-times"></i></button>
+          <div className="w-full flex justify-end space-x-6 mb-6">
+            <a href={selectedImg} download="travel-doc.png" className="text-white text-2xl p-2"><i className="fas fa-download"></i></a>
+            <button onClick={() => setSelectedImg(null)} className="text-white text-2xl p-2"><i className="fas fa-times"></i></button>
           </div>
-          <img src={selectedImg} className="max-w-full max-h-[80vh] object-contain" />
+          <div className="flex-grow flex items-center justify-center w-full">
+            <img src={selectedImg} className="max-w-full max-h-full object-contain shadow-2xl" />
+          </div>
         </div>
       )}
 
-      <div className="text-center pt-2"><p className="text-[9px] font-bold text-gray-300 uppercase">Usana Unstoppable 2026</p></div>
+      <div className="text-center pt-2"><p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Usana Unstoppable 2026</p></div>
     </div>
   );
 };
