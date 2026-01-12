@@ -1,33 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const HomeTab: React.FC = () => {
-  const [klTime, setKlTime] = useState<string>('');
-  const [klDate, setKlDate] = useState<string>('');
   const [myrAmount, setMyrAmount] = useState<string>('');
   const [krwAmount, setKrwAmount] = useState<string>('');
   const [images, setImages] = useState<string[]>([]);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const EXCHANGE_RATE = 360;
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = { 
-        timeZone: 'Asia/Kuala_Lumpur',
-        month: 'short', day: 'numeric', weekday: 'short' 
-      };
-      const klFormatter = new Intl.DateTimeFormat('ko-KR', options);
-      const klTimeFormatter = new Intl.DateTimeFormat('ko-KR', {
-        timeZone: 'Asia/Kuala_Lumpur',
-        hour: '2-digit', minute: '2-digit', hour12: false
-      });
-      setKlDate(klFormatter.format(now));
-      setKlTime(klTimeFormatter.format(now));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const handleMyrChange = (val: string) => {
     setMyrAmount(val);
@@ -52,22 +32,8 @@ const HomeTab: React.FC = () => {
 
   return (
     <div className="p-4 space-y-4 animate-fadeIn pb-10">
-      {/* Optimized Horizontal Time Display */}
-      <section className="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
-            <i className="fas fa-clock text-usanaBlue text-lg"></i>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-gray-400 font-black uppercase tracking-wider">KL LOCAL TIME</span>
-            <p className="text-[11px] text-gray-500 font-bold leading-none mt-0.5">{klDate}</p>
-          </div>
-        </div>
-        <span className="text-2xl font-black text-usanaBlue tracking-tighter">{klTime || '--:--'}</span>
-      </section>
-
       {/* Currency */}
-      <div className="bg-gradient-to-br from-usanaBlue to-blue-900 p-6 rounded-[2rem] shadow-xl text-white">
+      <div className="bg-gradient-to-br from-usanaBlue to-blue-900 p-6 rounded-[2rem] shadow-xl text-white mt-2">
         <div className="flex justify-between items-center mb-5">
           <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-[10px] font-black tracking-widest text-white">CURRENCY (1 MYR = 360 KRW)</span>
           <i className="fas fa-coins opacity-50"></i>
@@ -81,6 +47,31 @@ const HomeTab: React.FC = () => {
             <input type="number" value={krwAmount} onChange={(e) => handleKrwChange(e.target.value)} placeholder="0" className="bg-white bg-opacity-10 border border-white border-opacity-10 rounded-2xl pl-4 pr-14 py-3 w-full text-xl font-bold text-white focus:outline-none focus:ring-2 focus:ring-usanaGold"/>
             <span className="absolute right-4 top-1/2 -translate-y-1/2 font-black text-usanaGold text-sm">KRW</span>
           </div>
+        </div>
+      </div>
+
+      {/* Compact MDAC Application Card */}
+      <div className="bg-gradient-to-r from-usanaGold to-[#b8952d] p-4 rounded-[1.5rem] shadow-md border border-white/20 relative overflow-hidden group active:scale-[0.98] transition-transform">
+        <div className="absolute -right-2 -top-2 w-16 h-16 bg-white opacity-10 rounded-full blur-xl"></div>
+        <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center space-x-3">
+            <div className="w-9 h-9 bg-white/20 rounded-lg flex items-center justify-center shadow-inner shrink-0">
+              <i className="fas fa-passport text-white text-base"></i>
+            </div>
+            <div>
+              <h3 className="text-white font-black text-[13px] leading-tight">MDAC 입국 신고서 <span className="text-[10px] font-bold text-white/70 ml-1">(필수)</span></h3>
+              <p className="text-[10px] text-white/90 font-medium">입국 전 3일 이내 작성 완료</p>
+            </div>
+          </div>
+          <a 
+            href="https://imigresen-online.imi.gov.my/mdac/main" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-center space-x-2 bg-white text-[#a38428] px-4 py-2 rounded-xl font-black text-[11px] shadow-lg w-full sm:w-auto hover:bg-gray-50 transition-colors shrink-0"
+          >
+            <span>사이트 이동</span>
+            <i className="fas fa-external-link-alt text-[9px]"></i>
+          </a>
         </div>
       </div>
 
@@ -101,7 +92,7 @@ const HomeTab: React.FC = () => {
             <div className="mb-4 p-4 bg-blue-50 rounded-2xl border border-blue-100">
               <p className="text-[11px] text-blue-800 leading-relaxed font-medium">
                 <i className="fas fa-info-circle mr-1"></i>
-                여권 사본, 항공권 E-티켓, 호텔 예약증 등을 촬영하거나 캡처하여 보관하세요. 비상시 오프라인에서도 확인이 가능합니다.
+                여권 사본, 항공권 E-티켓, 호텔 예약증 등을 촬영하거나 캡처하여 보관하세요.
               </p>
             </div>
             <label className="mb-4 block w-full py-4 border-2 border-dashed border-gray-200 rounded-2xl text-center text-xs text-gray-400 font-bold cursor-pointer active:bg-gray-50 transition-colors">
