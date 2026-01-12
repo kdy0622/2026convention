@@ -4,7 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Usana Malaysia 2026</title>
+    
+    <!-- KakaoTalk / SNS Share Optimization (Open Graph) -->
+    <meta property="og:title" content="2026 USANA Malaysia Convention (WITH TEAM)">
+    <meta property="og:description" content="유사나 말레이시아 컨벤션 전용 가이드 웹앱. 일정, 호텔, 서바이벌 가이드 포함.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1596422846543-75c6fc18a593?q=80&w=1000&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Usana Malaysia 2026 (WITH TEAM)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -25,6 +33,13 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        
+        /* Smooth Fade In */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 <script type="importmap">
 {

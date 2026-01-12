@@ -32,65 +32,64 @@ const App: React.FC = () => {
               </div>
               <div className="flex flex-col border-l border-white/20 pl-3">
                 <div className="flex items-center space-x-1">
-                  <h1 className="text-[15px] font-black tracking-tighter leading-none uppercase italic text-white">2026 Malaysia</h1>
-                  <span className="text-[11px] font-black text-usanaGold italic">(WITH TEAM)</span>
+                  <h1 className="text-[14px] font-black tracking-tighter leading-none uppercase italic text-white">2026 Malaysia</h1>
+                  <span className="text-[10px] font-black text-usanaGold italic tracking-tighter">(WITH TEAM)</span>
                 </div>
-                <span className="text-[9px] text-white/70 font-bold tracking-[0.2em] mt-1 uppercase">Convention Guide</span>
+                <span className="text-[9px] text-white/70 font-bold tracking-[0.2em] mt-1 uppercase leading-none">Convention Guide</span>
               </div>
             </div>
-            <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border border-white/20">
-               <i className="fas fa-users text-usanaGold"></i>
+            <div className="flex items-center space-x-2">
+               <div className="bg-white/10 px-2 py-1 rounded text-[10px] border border-white/20 font-bold text-usanaGold">KL 2026</div>
             </div>
           </div>
         </header>
 
-        {/* 비주얼 영역: 실제 컨벤션 센터 이미지 적용 */}
+        {/* 비주얼 영역: 컨벤션 느낌을 강조한 레이아웃 */}
         <div className="w-full h-44 relative overflow-hidden bg-[#001f4d] flex items-center justify-center">
           {/* 기본 배경 (이미지 로딩 전) */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#010b1a] via-usanaBlue to-[#001f4d]"></div>
           
           {/* 장식용 아이콘 */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-            <i className="fas fa-building-columns text-white text-[120px]"></i>
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <i className="fas fa-globe-asia text-white text-[150px]"></i>
           </div>
 
-          {/* 메인 비주얼: MITEC 컨벤션 센터 (안정적인 위키미디어 주소 사용) */}
+          {/* 메인 비주얼: 말레이시아 랜드마크 & 컨벤션 이미지 */}
           <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/MITEC_Exterior.jpg/1200px-MITEC_Exterior.jpg" 
-            alt="MITEC Convention Centre" 
+            src="https://images.unsplash.com/photo-1596422846543-75c6fc18a593?q=80&w=1200" 
+            alt="Kuala Lumpur" 
             className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-1000 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={() => setImgLoaded(true)}
             onError={(e) => {
-              // 실패 시 대체 주소 (Pixabay)
               const target = e.target as HTMLImageElement;
-              if (!target.src.includes('pixabay')) {
-                target.src = "https://cdn.pixabay.com/photo/2016/11/14/03/48/kuala-lumpur-1822527_1280.jpg";
-              }
+              target.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/MITEC_Exterior.jpg/1200px-MITEC_Exterior.jpg";
             }}
           />
 
           {/* 그라데이션 오버레이 */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-20"></div>
 
           {/* 헤더 하단 텍스트 정보 */}
           <div className="absolute bottom-4 left-5 right-5 z-30 flex justify-between items-end">
             <div className="flex flex-col">
-               <div className="inline-flex items-center space-x-2 bg-usanaBlue/60 backdrop-blur-md px-2 py-1 rounded-md mb-2 border border-white/10 w-max">
-                 <i className="fas fa-location-dot text-usanaGold text-[10px]"></i>
-                 <span className="text-white text-[10px] font-bold uppercase tracking-widest">MITEC, Kuala Lumpur</span>
+               <div className="inline-flex items-center space-x-2 bg-usanaGold/90 px-2 py-0.5 rounded-sm mb-2 w-max shadow-lg">
+                 <span className="text-white text-[9px] font-black uppercase tracking-widest">Official Convention Venue</span>
                </div>
-               <h2 className="text-2xl font-black text-white tracking-tighter leading-tight drop-shadow-xl uppercase italic">
-                 Unstoppable <span className="text-usanaGold text-3xl">2026</span>
+               <h2 className="text-2xl font-black text-white tracking-tighter leading-tight drop-shadow-2xl uppercase italic">
+                 Unstoppable <span className="text-usanaGold">Together</span>
                </h2>
             </div>
             
-            <button 
-              onClick={() => window.open('https://www.google.com/search?q=MITEC+Kuala+Lumpur+interior&tbm=isch', '_blank')}
-              className="bg-white/10 backdrop-blur-md text-white px-3 py-2 rounded-xl flex flex-col items-center justify-center active:scale-95 transition-transform border border-white/20"
-            >
-              <i className="fas fa-expand text-xs mb-0.5 text-usanaGold"></i>
-              <span className="text-[9px] font-black uppercase">전경 보기</span>
-            </button>
+            <div className="flex flex-col items-end">
+               <span className="text-white/60 text-[8px] font-bold uppercase mb-1">MITEC Exhibition Centre</span>
+               <button 
+                onClick={() => window.open('https://www.google.com/search?q=MITEC+Kuala+Lumpur&tbm=isch', '_blank')}
+                className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full flex items-center space-x-1 border border-white/30 active:scale-95 transition-transform"
+              >
+                <i className="fas fa-camera text-[10px]"></i>
+                <span className="text-[10px] font-bold uppercase">Gallery</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
