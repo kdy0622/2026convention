@@ -122,8 +122,8 @@ const HotelTab: React.FC = () => {
           {poiData[expandedId].items.map((item: any, idx: number) => (
             <div key={idx} className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
               <div className="flex justify-between items-start mb-2">
-                <h5 className="font-black text-gray-800 text-sm leading-tight">{item.name}</h5>
-                <div className="flex space-x-2">
+                <h5 className="font-black text-gray-800 text-sm leading-tight pr-2">{item.name}</h5>
+                <div className="flex space-x-2 shrink-0">
                   <a href={imgSearch(item.name)} target="_blank" className="text-[9px] text-blue-500 font-bold border border-blue-100 px-2 py-1 rounded-full"><i className="fas fa-image mr-1"></i>사진</a>
                   <a href={mapSearch(item.name)} target="_blank" className="text-[9px] text-green-500 font-bold border border-green-100 px-2 py-1 rounded-full"><i className="fas fa-location-arrow mr-1"></i>지도</a>
                 </div>
@@ -135,6 +135,12 @@ const HotelTab: React.FC = () => {
                 {item.price && <p className="text-usanaBlue font-black">💵 <strong>가격:</strong> {item.price}</p>}
                 {item.history && <p className="text-gray-500 italic leading-snug">📜 {item.history}</p>}
               </div>
+              <button 
+                onClick={() => window.open(imgSearch(item.name), '_blank')}
+                className="mt-3 w-full py-2 bg-blue-50 text-blue-700 rounded-xl text-[10px] font-black border border-blue-100 flex items-center justify-center active:bg-blue-100 transition-colors"
+              >
+                <i className="fas fa-images mr-2"></i>이 장소의 사진 더보기
+              </button>
             </div>
           ))}
         </div>

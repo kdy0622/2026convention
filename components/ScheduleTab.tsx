@@ -147,6 +147,18 @@ const ScheduleTab: React.FC = () => {
                 </div>
                 {expandedId === item.id && (
                   <div className="px-5 pb-5 pt-1 space-y-4 animate-slideDown">
+                    <div className="flex justify-end pt-1">
+                      <a 
+                        href={imgSearch(item.title)} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 flex items-center"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <i className="fas fa-image mr-1.5"></i>이미지 검색
+                      </a>
+                    </div>
+
                     {item.details && (
                       <div className="bg-blue-50 p-4 rounded-2xl border border-blue-100">
                         <p className="text-xs text-blue-900 leading-relaxed font-medium"><strong>📝 상세:</strong> {item.details}</p>
