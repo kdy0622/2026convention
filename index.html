@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- KakaoTalk / SNS Share Optimization (Open Graph) -->
+    <!-- 공유 시 제목 -->
     <meta property="og:title" content="2026 USANA Malaysia Convention (WITH TEAM)">
-    <meta property="og:description" content="유사나 말레이시아 컨벤션 전용 가이드 웹앱. 일정, 호텔, 서바이벌 가이드 포함.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1596422846543-75c6fc18a593?q=80&w=1000&auto=format&fit=crop">
+    <!-- 공유 시 설명 -->
+    <meta property="og:description" content="유사나 말레이시아 컨벤션 공식 가이드 - 일정, 호텔, 서바이벌 팁 수록">
+    <!-- 공유 시 이미지 (카카오톡 최적화 사이즈: 800x400 이상 권장) -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1596422846543-75c6fc18a593?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="https://2026convention.vercel.app">
 
     <title>Usana Malaysia 2026 (WITH TEAM)</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +39,6 @@
         .tab-content.active { display: block; }
         .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
         
-        /* Smooth Fade In */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
